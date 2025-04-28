@@ -1,0 +1,214 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 271 81% 26%;
+    --card: 0 0% 98%;
+    --card-foreground: 271 81% 26%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 271 81% 26%;
+    --primary: 271 81% 36%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 0 0% 96%;
+    --secondary-foreground: 271 81% 26%;
+    --muted: 0 0% 96%;
+    --muted-foreground: 0 0% 45.1%;
+    --accent: 271 81% 36%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 84.2% 40.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 89.8%;
+    --input: 0 0% 89.8%;
+    --ring: 271 81% 36%;
+    --button-text-color: 271 81% 98%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 0 0% 0%;
+    --foreground: 0 0% 100%;
+    --card: 0 0% 10%;
+    --card-foreground: 0 0% 100%;
+    --popover: 0 0% 7%;
+    --popover-foreground: 0 0% 100%;
+    --primary: 271 81% 56%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 0 0% 13%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 0 0% 13%;
+    --muted-foreground: 0 0% 100%;
+    --accent: 271 81% 56%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 0 0% 14.9%;
+    --input: 0 0% 14.9%;
+    --ring: 271 81% 56%;
+    --button-text-color: 271 81% 100%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+
+  button {
+    color: hsl(var(--button-text-color));
+  }
+}
+
+/* Responsive classes */
+@layer utilities {
+  .section-padding {
+    @apply px-4 md:px-6 lg:px-8;
+  }
+
+  .content-container {
+    @apply max-w-7xl mx-auto w-full px-4;
+  }
+
+  .grid-layout {
+    @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6;
+  }
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.track-title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+.track-card {
+  @apply w-full flex items-center gap-4 p-4 relative;
+  height: auto;
+  min-height: 70px;
+}
+
+/* Player transitions */
+.player-expand-enter {
+  opacity: 0;
+  transform: translateY(100%);
+}
+
+.player-expand-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 300ms, transform 300ms;
+}
+
+.player-expand-exit {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.player-expand-exit-active {
+  opacity: 0;
+  transform: translateY(100%);
+  transition: opacity 300ms, transform 300ms;
+}
+
+/* Mobile adaptations */
+@media (max-width: 768px) {
+  .track-card {
+    @apply h-[70px] p-2;
+  }
+
+  .expanded-player {
+    @apply p-4;
+  }
+
+  .expanded-player-artwork {
+    @apply w-full max-w-[300px] aspect-square;
+  }
+
+  .expanded-player-controls {
+    @apply w-full max-w-[300px];
+  }
+
+  .content-container {
+    @apply px-2;
+  }
+
+  .section-padding {
+    @apply px-2;
+  }
+}
+
+/* Background elements - managed by theme utils */
+#sunrise-gradient {
+  z-index: -10;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+/* Fix for tracks being hidden by the player */
+.albums-container {
+  @apply pb-40 mb-4;
+}
+
+/* Button styling with consistent colors */
+.btn-primary {
+  @apply bg-primary text-[hsl(var(--button-text-color))] hover:bg-primary/90;
+}
+
+.btn-secondary {
+  @apply bg-secondary text-secondary-foreground hover:bg-secondary/80;
+}
+
+.btn-accent {
+  @apply bg-accent text-[hsl(var(--button-text-color))] hover:bg-accent/90;
+}
+
+.btn-destructive {
+  @apply bg-destructive text-destructive-foreground hover:bg-destructive/90;
+}
+
+.btn-outline {
+  @apply border border-input bg-background hover:bg-accent hover:text-[hsl(var(--button-text-color))];
+}
+
+.btn-ghost {
+  @apply hover:bg-accent/10 hover:text-[hsl(var(--button-text-color))];
+}
+
+/* Make sure heading text colors match theme */
+h1, h2, h3, h4, h5, h6 {
+  @apply text-foreground;
+}
+
+a {
+  @apply text-accent hover:text-accent/80;
+}
+
+/* Use direct CSS variable for accent text color */
+.text-accent-color {
+  color: hsl(var(--accent));
+}
+
+/* Ensure buttons have consistent color */
+button, .button {
+  color: hsl(var(--button-text-color));
+}
